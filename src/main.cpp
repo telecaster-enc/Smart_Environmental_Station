@@ -3,13 +3,10 @@
 #include <Adafruit_Sensor.h>
 #include <DHT.h>
 
-const char* ssid = "Redmi Note 10S";
-const char* pw = "z1111111";
+const char* ssid = "YOUR_SSID";
+const char* pw = "YOUR_PW";
 
-#define DHTPIN 4
-#define DHTTYPE DHT11
-
-DHT dht(DHTPIN, DHTTYPE);
+DHT dht(4, DHT11);
 
 String temp() {
     float t = dht.readTemperature();
@@ -33,6 +30,16 @@ int ldr(){
     return analogRead(34);
 }
 
+int soil(){
+    return analogRead(35);
+}
+
+//int rain(){ return analogRead(32); }
+
+//int sound(){ return analogRead(35); }
+
+int waterlev(){ return analogRead(32); }
+
 void setup() {
     Serial.begin(115200);
     dht.begin();
@@ -44,9 +51,13 @@ void setup() {
 }
 
 void loop() {
-    Serial.println(WiFi.localIP());
-    Serial.println(temp());
-    Serial.println(humid());
-    Serial.println(ldr());
-    delay(1000);
+    Serial.println("IP:");Serial.println(WiFi.localIP());
+    Serial.println("Temp:");Serial.println(temp());
+    Serial.println("Humid:");Serial.println(humid());
+    Serial.println("Light:");Serial.println(ldr());
+    Serial.println("Soil Moisture:");Serial.println(soil());
+    //Serial.println("Rain:"); Serial.println(rain());
+    //Serial.println("Sound:"); Serial.println(sound());
+    Serial.println("Water:"); Serial.println(waterlev());
+    delay(2000);
 }
