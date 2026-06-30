@@ -29,6 +29,9 @@ String humid() {
     }
 }
 
+int ldr(){
+    return analogRead(34);
+}
 
 void setup() {
     Serial.begin(115200);
@@ -44,5 +47,6 @@ void loop() {
     Serial.println(WiFi.localIP());
     Serial.println(temp());
     Serial.println(humid());
+    Serial.println(ldr());
     delay(1000);
 }
